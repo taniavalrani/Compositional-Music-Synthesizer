@@ -1,0 +1,28 @@
+Engine: ObstacleAvoidance
+InputVariable: form
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: EXPOSITION Triangle 0.000 0.200 0.400
+  term: DEVELOPMENT Triangle 0.300 0.700 1.000	
+  term: RECAPITULATION Triangle 0.150 0.400 0.700
+OutputVariable: variance
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 200
+  default: nan
+  lock-previous: false
+  term: LOW Ramp 1.000 0.000
+  term: MIDDLE Ramp 0.650 0.400
+  term: HIGH Ramp 0.000 1.000
+RuleBlock: mamdani
+  enabled: true
+  conjunction: EinsteinProduct
+  disjunction: EinsteinSum
+  implication: EinsteinProduct
+  activation: General
+  rule: if form is EXPOSITION then variance is LOW
+  rule: if form is DEVELOPMENT then variance is HIGH
+  rule: if form is RECAPITULATION then variance is MIDDLE
